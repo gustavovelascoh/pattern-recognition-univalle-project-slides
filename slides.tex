@@ -1,4 +1,4 @@
-\documentclass{beamer}
+\documentclass[table]{beamer}
 
 \usepackage[utf8]{inputenc}
 \usepackage{enumitem}
@@ -14,6 +14,8 @@
 \usecolortheme{dove}
 %\usefonttheme[onlylarge]{structurebold}
 %http://www.hartwork.org/beamer-theme-matrix/
+
+\renewcommand{\arraystretch}{1.5}
 
 \title[Laser-Based Feature Extraction and Pattern Recognition in IMS]{Laser-Based Feature Extraction and Pattern Recognition in Intersection Management Systems}
 \author{Gustavo Velasco-Hernández}
@@ -36,7 +38,7 @@
 \frame
 {
 	\frametitle{Context}
-	Master's Thesis Project:
+	Master's Research Project:
 	Multisensor Architecture for a Vehicular Intersection Management System
 }
 \subsection{Problem Statement}
@@ -217,7 +219,7 @@
 		\item Objective 5. \textcolor{blue}{\emph{Testing and Comparison}}
 	\end{itemize}
 	
-	\emph{Objective 4 is out of the scope of the project course.}
+	\emph{Objective 4 is out of the scope of this class.}
 }
 
 \section{Aims and Conditions}
@@ -273,25 +275,7 @@
 		\caption{POSS-i project. [Zhao09][Zhao12][Song13b]}
 	\end{figure}
 }
-\frame
-{
-	\frametitle{Applications}
-	\begin{itemize}
-		\item Recognition
-		\item Classification
-		\item Tracking
-	\end{itemize}
-}
-\frame
-{
-	\frametitle{Methods and Techniques}
-	\begin{itemize}
-		\item Clustering
-		\item Markov Chains
-		\item Kalman Filtering
-		\item AdaBoost
-	\end{itemize}
-}
+
 
 \subsection{Ko-PER}
 \frame
@@ -312,26 +296,53 @@
 		\caption{3D-recreated intersection scene with laser beams depicted [Meissner12, 13a, 13b, 13c, 14][Striegel13]}
 	\end{figure}
 }
+
+\subsection{Methods And Techniques}
 \frame
 {
-	\frametitle{Applications}
-	\begin{itemize}
-		\item Recognition
-		\item Classification
-		\item Tracking
+	\frametitle{Applications, Methods and Techniques}
+	
+	\scriptsize{
+	\begin{table}	
+	\begin{tabular}{|c|c|c|}
+	\hline
+	Project & POSSi & Ko-PER \\
+	\hline
+	Applications & \multicolumn{2}{c|}{\parbox{6cm}{Recognition, Classification and Tracking of Vehicles and Pedestrians}} \\
+	\hline
+	\parbox{2.5cm}{Methods and \\Techniques}
+	& \parbox{2.5cm}{\begin{itemize}[leftmargin=.07in]
+		\item[-] Clustering
+		\item[-] Markov Chains
+		\item[-] Kalman Filtering
+		\item[-] AdaBoost
 	\end{itemize}
-}
-\frame
-{
-	\frametitle{Methods and Techniques}
-	\begin{itemize}
-		\item DBSCAN
-		\item Multi-object Bayes Filter
-		\item Sequential Monte Carlo Methods
-		\item Dempster-Shafer Theory
-		\item Multiple-Model Probability Hypothesis Density Filter (in Gaussian Mixture representation)
+	}
+	& \parbox{3.5cm}{
+	\begin{itemize}[leftmargin=.07in]
+		\item[-] DBSCAN
+		\item[-] Multi-object Bayes Filter
+		\item[-] Sequential Monte Carlo Methods
+		\item[-] Dempster-Shafer Theory
+		\item[-] Multiple-Model Probability Hypothesis Density Filter (in Gaussian Mixture representation)
 	\end{itemize}
+	}\\
+	\hline
+	
+	\end{tabular}
+	\caption{POSSi and PKU projects comparison}	
+	\end{table}
+	}
 }
+\section{Proposed Solution}
+\subsection{Block Diagrams}
+\frame{}
+\subsubsection{Video Processing}
+\frame{}
+\subsubsection{Laser Processing}
+\frame{}
+\subsubsection{Data Fusion}
+\frame{}
 %\frame{
 %	\frametitle{Conditions}
 %	\begin{itemize}
