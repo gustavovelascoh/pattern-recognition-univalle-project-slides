@@ -39,7 +39,7 @@
 \frame
 {
 	\frametitle{Context}
-	Master's Research Project:
+	Master's Research Project:\\
 	Multisensor Architecture for a Vehicular Intersection Management System
 }
 \subsection{Problem Statement}
@@ -48,9 +48,9 @@
 	\frametitle{Transportation Systems}
 	Issues in traditional transportation systems
 	\begin{itemize}
-		\item Congestion
-		\item Traffic rules violation
-		\item Vehicle interaction
+		\item[-] Congestion
+		\item[-] Traffic rules violation
+		\item[-] Vehicle interaction
 	\end{itemize}
 }
 
@@ -59,9 +59,9 @@
 	\frametitle{Transportation Systems}
 	Issues in traditional transportation systems
 	\begin{itemize}
-		\item Congestion
-		\item Traffic rules violation
-		\item Vehicle interaction
+		\item[-] Congestion
+		\item[-] Traffic rules violation
+		\item[-] Vehicle interaction
 	\end{itemize}
 	Intersections are critical places in transportation systems
 }
@@ -71,9 +71,9 @@
 	\frametitle{Intelligent Transportation Systems}
 	Objectives of ITS
 	\begin{itemize}
-		\item Increase safety
-		\item Increase efficiency
-		\item Reduce costs
+		\item[-] Increase safety
+		\item[-] Increase efficiency
+		\item[-] Reduce costs
 	\end{itemize}
 }
 
@@ -82,9 +82,9 @@
 	\frametitle{Intersection Management Systems}
 	Tasks
 	\begin{itemize}
-		\item Traffic Monitoring
-		\item Traffic Management
-		\item Warning Advertisement
+		\item[-] Traffic Monitoring
+		\item[-] Traffic Management
+		\item[-] Warning Advertisement
 	\end{itemize}
 }
 
@@ -92,9 +92,9 @@
 {
 	\frametitle{Intersection Scenario}
 	\begin{itemize}
-		\item Pedestrians, Vehicles (Cars, Two-wheeled vehicles, Big vehicles)
-		\item Recognition, Classification, Tracking
-		\item Incident detection, Intersection Management
+		\item[-] Pedestrians, Vehicles (Cars, Two-wheeled vehicles, Big vehicles)
+		\item[-] Recognition, Classification, Tracking
+		\item[-] Incident detection, Intersection Management
 	\end{itemize}
 }
 %\subsection{Objectives}
@@ -227,7 +227,7 @@
 \subsubsection*{Aims}
 \frame{
 	\frametitle{Main Objective}
-	To develop a feature extraction and pattern recognition laser-based module for an intersection management system 
+	- To develop a feature extraction and pattern recognition laser-based module for an intersection management system 
 }
 \frame{
 	\frametitle{Sub-objectives}
@@ -334,6 +334,44 @@
 	\end{table}
 	}
 }
+
+\frame
+{
+	\frametitle{Applications, Methods and Techniques}
+	
+	\scriptsize{
+	\begin{table}	
+	\begin{tabular}{|c|c|c|}
+	\hline
+	Project & POSSi & Ko-PER \\
+	\hline
+	Applications & \multicolumn{2}{c|}{\parbox{6cm}{Recognition, Classification and Tracking of Vehicles and Pedestrians}} \\
+	\hline
+	\parbox{2.5cm}{Methods and \\Techniques}
+	& \parbox{2.5cm}{\begin{itemize}[leftmargin=.07in]
+		\item[-] \textcolor{blue}{Clustering}
+		\item[-] \textcolor{blue}{Markov Chains}
+		\item[-] Kalman Filtering
+		\item[-] AdaBoost
+	\end{itemize}
+	}
+	& \parbox{3.5cm}{
+	\begin{itemize}[leftmargin=.07in]
+		\item[-] \textcolor{blue}{DBSCAN}
+		\item[-] Multi-object Bayes Filter
+		\item[-] Sequential Monte Carlo Methods
+		\item[-] Dempster-Shafer Theory
+		\item[-] Multiple-Model Probability Hypothesis Density Filter (in Gaussian Mixture representation)
+	\end{itemize}
+	}\\
+	\hline
+	
+	\end{tabular}
+	\caption{POSSi and PKU projects comparison}	
+	\end{table}
+	}
+}
+
 \section{Proposed Solution}
 \subsection{Block Diagrams}
 \frame{
@@ -399,7 +437,20 @@
 	\end{figure}
 }
 
-\section{Implementation}
+\section{Datasets and Implementation}
+
+\subsection{Datasets Overview}
+
+\frame{
+	\frametitle{Dataset}
+	\begin{itemize}
+		\item[-] Although datasets for both projects are available, POSS-i dataset was choosen.
+		\item[-] It includes laser readings from 6 laser-scanner located in different corners in an intersection.
+		\item[-] The duration of scanning is approximately 10 minutes.
+		\item[-] A background model for each laser is provided
+	\end{itemize}
+}
+
 \frame{
 	\frametitle{Dataset}
 	\begin{figure}
@@ -408,9 +459,9 @@
 	\end{figure}
 }
 
-\subsection{Dataset}
 
-\subsection{Background Extraction}
+
+\subsection{Foreground Estimation}
 \frame{
 	\frametitle{Background Extraction}
 	\begin{itemize}
@@ -420,7 +471,38 @@
 	\end{itemize}
 }
 
-\subsection{Object Classification}
+\frame{
+	\frametitle{Clustering}
+	\begin{itemize}
+		\item[-] Histogram-based background extraction
+		\item[-] Done for each angle
+		\item[-] When a pick value is detected, tells that an object is detected
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{Clustering}
+	\begin{figure}
+		\includegraphics[scale=0.45]{fig/ulcs1.png}		
+	\end{figure}
+}
+\frame
+{
+	\frametitle{Clustering}
+	\begin{figure}
+		\includegraphics[scale=0.45]{fig/ulcs2.png}	
+	\end{figure}
+}
+\frame
+{
+	\frametitle{Clustering}
+	\begin{figure}
+		\includegraphics[scale=0.45]{fig/ulcs3.png}	
+	\end{figure}
+}
+
+\subsection{Feature Extraction and Classification}
 \frame{
 	\frametitle{Classification}
 	\begin{itemize}
@@ -443,7 +525,6 @@
 		\end{figure}
 }
 
-\subsection{Feature Extraction}
 \frame{
 	\frametitle{Features}
 	\begin{itemize}
@@ -454,8 +535,6 @@
 		\item[-] Markov States		
 	\end{itemize}
 }
-\subsection{Implementation}
-
 
 \subsection{Next Steps}
 \frame{
@@ -478,30 +557,6 @@
 %     Contents split \\ into two lines
 %    \end{columns}
 %}
-
-
-\subsection{Clustering}
-\frame
-{
-	\frametitle{Clustering}
-	\begin{figure}
-		\includegraphics[scale=0.45]{fig/ulcs1.png}		
-	\end{figure}
-}
-\frame
-{
-	\frametitle{Clustering}
-	\begin{figure}
-		\includegraphics[scale=0.45]{fig/ulcs2.png}		
-	\end{figure}
-}
-\frame
-{
-	\frametitle{Clustering}
-	\begin{figure}
-		\includegraphics[scale=0.45]{fig/ulcs3.png}		
-	\end{figure}
-}
 
 %\frame{
 %	\frametitle{Conditions}
