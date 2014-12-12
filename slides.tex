@@ -313,6 +313,7 @@
 	\parbox{2.5cm}{Methods and \\Techniques}
 	& \parbox{2.5cm}{\begin{itemize}[leftmargin=.07in]
 		\item[-] Clustering
+		\item[-] KL Transform
 		\item[-] Markov Chains
 		\item[-] Kalman Filtering
 		\item[-] AdaBoost
@@ -350,6 +351,7 @@
 	\parbox{2.5cm}{Methods and \\Techniques}
 	& \parbox{2.5cm}{\begin{itemize}[leftmargin=.07in]
 		\item[-] \textcolor{blue}{Clustering}
+		\item[-] \textcolor{blue}{KL Transform}
 		\item[-] \textcolor{blue}{Markov Chains}
 		\item[-] Kalman Filtering
 		\item[-] AdaBoost
@@ -447,7 +449,7 @@
 		\item[-] Although datasets for both projects are available, POSS-i dataset was choosen.
 		\item[-] It includes laser readings from 6 laser-scanner located in different corners in an intersection.
 		\item[-] The duration of scanning is approximately 10 minutes.
-		\item[-] A background model for each laser is provided
+		%\item[-] A background model for each laser is provided
 	\end{itemize}
 }
 
@@ -468,15 +470,49 @@
 		\item[-] Histogram-based background extraction
 		\item[-] Done for each angle
 		\item[-] When a pick value is detected, tells that an object is detected
+		\item<2->[\textcolor{green}{-}] \textcolor{green}{Dataset already includes a background model for each laser scanner}
 	\end{itemize}
 }
 
 \frame{
 	\frametitle{Clustering}
 	\begin{itemize}
-		\item[-] Histogram-based background extraction
-		\item[-] Done for each angle
-		\item[-] When a pick value is detected, tells that an object is detected
+		\item[-] In [Zhao06] it is not detailed how clustering was done, so DBSCAN is proposed to identify clusters in laser-data points
+	\end{itemize}
+}
+
+\frame{
+	\frametitle{DBSCAN - Introduction}
+	\begin{itemize}
+		\item[-] Density-Based Spatial Clustering for Applications with Noise
+		\item[-] Proposed by Ester et al in 1996 in KDD conference [Ester96].
+	\end{itemize}
+}
+
+\frame{
+	\frametitle{DBSCAN - Explanation}
+	\begin{itemize}
+		\item[-] The algorithm needs two parameters: $Eps (\epsilon)$ and $minPts$
+		\item[-] Also are defined two types of points: Core points and border points
+		\item[-] $p$ is a core point if in its $Eps$-$Neighborhood$ are at least $minPts$ points.
+	\end{itemize}
+	\begin{figure}
+		\includegraphics[scale=0.35]{fig/cbpoints.png}
+		\scriptsize{\caption{Types of points [Ester96]}}
+	\end{figure}
+}
+
+\frame{
+	\frametitle{DBSCAN - Algorithm}
+	\begin{itemize}
+		\item[-] DBSCAN starts at an arbitrary point $p$, then evaluate if point's $Eps$-$Neighnorhood$ contains at least $minPts$ points
+		\item[-] If $True$, $p$ is a core point (Is in a cluster)
+		\begin{itemize}
+			\item[-] Assign $clusterId$ to p and its neighbour, and neighbours of its neighbours and so on.
+			\item[-] Increase $clusterId$.		
+		\end{itemize}
+		\item[-] If $False$, $p$ is labelled as Noise
+		\item[-] Continue with an unlabelled point, until all points in dataset are labelled.
 	\end{itemize}
 }
 
@@ -504,7 +540,7 @@
 
 \subsection{Feature Extraction and Classification}
 \frame{
-	\frametitle{Classification}
+	\frametitle{Definitions}
 	\begin{itemize}
 		\item[-] Classes are proposed based on distribution of points in clusters
 		\item[-] Karhunen-Loeve Transform to detect number of axis
@@ -518,9 +554,7 @@
 		\begin{figure}
 			\includegraphics[scale=0.4]{fig/mstates.png}
 			\caption{There are 8 patterns that can happen}
-		\end{figure}
-		\begin{figure}
-			\includegraphics[scale=0.2]{fig/mtrans.png}
+			\includegraphics[scale=0.3]{fig/mtrans.png}
 			\caption{Possible transitions}
 		\end{figure}
 }
@@ -533,6 +567,12 @@
 		\item[-] Axis lengths		
 		\item[-] Directional vector, Motion speed
 		\item[-] Markov States		
+	\end{itemize}
+}
+\frame{
+	\frametitle{Classification and Tracking}
+	\begin{itemize}
+		\item[-] Classification and tracking stages are under review
 	\end{itemize}
 }
 
@@ -937,8 +977,8 @@
 		\item [Elmenreich07] Elmenreich, W. \textbf{A Review on System Architectures for Sensor Fusion Applications}. \textit{Software Technologies for Embedded and Ubiquitous Systems
 Lecture Notes in Computer Science Volume 4761 (pp. 547–559)}. 2007.
 		\item [Esteban12] Esteban, J. et al, \textbf{A Review of data fusion models and architectures: towards 	engineering guidelines}. \textit{Neural Computing and Applications, 14(4),(pp. 273–281)}. 2012.
-		\item [Goldhammer12] Goldhammer, M. et al, \textbf{Cooperative multi sensor network for traffic safety applications at intersections}. \textit{2012 15th International IEEE Conference on Intelligent Transportation Systems (pp. 1178–1183)}. 2012.
-		\item [Khaleghi11] Khaleghi, B. et al, \textbf{Multisensor data fusion: A review of the state-of-the-art}. \textit{Information Fusion, 14(1) (pp. 28–44)}. 2011.
+		\item [Ester96] Ester, M. et al. \textbf{A Density-Based Algorithm for Discovering Clusters in Large Spatial Databases with Noise}. \textit{Proceedings of 2nd International Conference on Knowledge Discovery and Data Mining (KDD-96)}. 1996.
+		\item [Goldhammer12] Goldhammer, M. et al, \textbf{Cooperative multi sensor network for traffic safety applications at intersections}. \textit{2012 15th International IEEE Conference on Intelligent Transportation Systems (pp. 1178–1183)}. 2012.		
 	\end{itemize}
 	}
 }
@@ -948,10 +988,10 @@ Lecture Notes in Computer Science Volume 4761 (pp. 547–559)}. 2007.
 	\frametitle{References}
 	\footnotesize{	
 	\begin{itemize}[leftmargin=.6in]
+		\item [Khaleghi11] Khaleghi, B. et al, \textbf{Multisensor data fusion: A review of the state-of-the-art}. \textit{Information Fusion, 14(1) (pp. 28–44)}. 2011.
 		\item [Luo02] Luo, R. C. \textbf{Multisensor fusion and integration: approaches, applications, and future research directions}. \textit{IEEE Sensors Journal, 2(2), 107–119}. 2002
 		\item [Luo11] Luo, R. C. et al. \textbf{Multisensor Fusion and Integration: Theories, Applications, and its Perspectives}. \textit{IEEE Sensors Journal, 11(12), 3122–3138}. 2011.
-	    \item [Meissner10] Meissner, D. and Dietmayer, K. \textbf{Simulation and calibration of infrastructure based laser scanner networks at intersections}.\textit{2010 IEEE Intelligent Vehicles Symposium, 670–675}. 2010.
-	    \item [Meissner12] Meissner, D., Reuter, S., and Dietmayer, K. \textbf{Real-time detection and tracking of pedestrians at intersections using a network of laserscanners}. \textit{2012 IEEE Intelligent Vehicles Symposium, 630–635}. 2012.
+	    \item [Meissner10] Meissner, D. and Dietmayer, K. \textbf{Simulation and calibration of infrastructure based laser scanner networks at intersections}.\textit{2010 IEEE Intelligent Vehicles Symposium, 670–675}. 2010.	    
 	\end{itemize}
 	}
 }
@@ -961,10 +1001,10 @@ Lecture Notes in Computer Science Volume 4761 (pp. 547–559)}. 2007.
 	\frametitle{References}
 		\footnotesize{
 	\begin{itemize}[leftmargin=.6in]
+		\item [Meissner12] Meissner, D., Reuter, S., and Dietmayer, K. \textbf{Real-time detection and tracking of pedestrians at intersections using a network of laserscanners}. \textit{2012 IEEE Intelligent Vehicles Symposium, 630–635}. 2012.
 		\item [Meissner13a] Meissner, D., Reuter, S., and Dietmayer, K. \textbf{Road user tracking at intersections using a multiple-model PHD filter}. \textit{2013 IEEE Intelligent Vehicles Symposium (IV), (Iv), 377–382}. 2013.
 		\item [Meissner13b] Meissner, D. et al. \textbf{Road User Tracking Using a Dempster-Shafer Based Classifying Multiple-Model PHD Filter}. \textit{Information Fusion (FUSION), 2013 16th International Conference on (Vol. 32, pp. 1236–1242)} 2013.
-		\item [Meissner13c] Meissner, D., Reuter, S., and Dietmayer, K. \textbf{Combining the 2D and 3D world: a new approach for point cloud based object detection}. \textit{IET Intelligent Signal Processing Conference 2013 (ISP 2013) (pp. 4.1–4.1)}. 2013.
-		\item [Meissner14] Meissner, D. et al. \textbf{Intersection-Based Road User Tracking Using a Classifying Multiple-Model PHD Filter}.\textit{ IEEE Intelligent Transportation Systems Magazine, 6(April 2014), 21–33}.2014.		
+		\item [Meissner13c] Meissner, D., Reuter, S., and Dietmayer, K. \textbf{Combining the 2D and 3D world: a new approach for point cloud based object detection}. \textit{IET Intelligent Signal Processing Conference 2013 (ISP 2013) (pp. 4.1–4.1)}. 2013.				
 	\end{itemize}	
 	}
 }
@@ -974,10 +1014,10 @@ Lecture Notes in Computer Science Volume 4761 (pp. 547–559)}. 2007.
 	\frametitle{References}
 		\footnotesize{
 	\begin{itemize}[leftmargin=.6in]
+		\item [Meissner14] Meissner, D. et al. \textbf{Intersection-Based Road User Tracking Using a Classifying Multiple-Model PHD Filter}.\textit{ IEEE Intelligent Transportation Systems Magazine, 6(April 2014), 21–33}.2014.
 		\item [Song08] Song, X. et al. \textbf{Bayesian fusion of laser and vision for multiple People Detection and tracking}. \textit{2008 SICE Annual Conference, 3014–3019}. 2008.
 		\item [Song13a] Song, X. et al. \textbf{Laser-based tracking of multiple interacting pedestrians via on-line learning}. \textit{Neurocomputing, 115, 92–105}. 2013.
-		\item [Song13b] Song,X. et al. \textbf{An Online System for Multiple Interacting Targets Tracking: Fusion of Laser and Vision, Tracking and Learning}. \textit{ACM Transactions on Intelligent Systems and Technology}. 2013.
-		\item [Strigel13] Strigel, E., Meissner, D., and Dietmayer, K. \textbf{Vehicle detection and tracking at intersections by fusing multiple camera views}. \textit{2013 IEEE Intelligent Vehicles Symposium (IV) (pp. 882–887)}. 2013.
+		\item [Song13b] Song,X. et al. \textbf{An Online System for Multiple Interacting Targets Tracking: Fusion of Laser and Vision, Tracking and Learning}. \textit{ACM Transactions on Intelligent Systems and Technology}. 2013.		
 	\end{itemize}	
 	}
 }
@@ -987,6 +1027,7 @@ Lecture Notes in Computer Science Volume 4761 (pp. 547–559)}. 2007.
 	\frametitle{References}
 		\footnotesize{
 	\begin{itemize}[leftmargin=.6in]
+		\item [Strigel13] Strigel, E., Meissner, D., and Dietmayer, K. \textbf{Vehicle detection and tracking at intersections by fusing multiple camera views}. \textit{2013 IEEE Intelligent Vehicles Symposium (IV) (pp. 882–887)}. 2013.
 		\item [Zhao06] Zhao, H., and Shibasaki, R. \textbf{Joint tracking and classification of moving objects at intersection using a single-row laser range scanner}. \textit{In Proceedings of the IEEE Intelligent Transportation Systems Conference (pp. 287–294)}. 2006.
 		\item [Zhao08] Zhao, H. et al.\textbf{ Monitoring an intersection using a network of laser scanners}. \textit{Proceedings of the11th International IEEE Conference on Intelligent Transportation Systems (pp. 428–433)}. 2008.
 		\item [Zhao09] Zhao, H., Cui, J., and Zha, H. \textbf{Sensing an Intersection Using a Network of Laser Scanners and Video Cameras}. \textit{IEEE Intelligent Transportation Systems Magazine, 31–37}. 2009.
